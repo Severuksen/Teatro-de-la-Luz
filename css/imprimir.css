@@ -1,0 +1,60 @@
+@charset "utf-8";
+.escenario {
+	position: absolute;
+	left: 0%;
+	top: 4%;
+	width: 842px;
+	height: 845px;
+	background-image:url(/imagenes/escenario.jpg);
+	background-repeat:no-repeat;
+	background-size: 100% 100%;
+	background-position: center;
+	transform: rotate(90deg) scale(0.5,0.5);
+}
+
+.luz1 {
+	position: absolute;
+	background-image:url(/imagenes/luz1.png);
+	background-repeat:no-repeat;
+	width:44px;
+	height:96px;
+	z-index: 1;
+}
+.luz2 {
+	position: absolute;
+	background-image:url(/imagenes/luz2.png);
+	background-repeat:no-repeat;
+	width:37px;
+	height:52px;
+	z-index: 1;
+}
+luz3 {
+	position: absolute;
+	background-image:url(/imagenes/luz3.png);
+	background-repeat:no-repeat;
+	width:51px;
+	height:33px;
+	z-index: 1;
+}
+.telon1 {
+	position: relative;
+	background-image:url(/imagenes/telon1.png);
+	background-repeat:no-repeat;
+	width:203px;
+	height:16px;
+	z-index: 1;
+}
+.paral1 {
+	background-image:url(/imagenes/paral1.png);
+	background-repeat:no-repeat;
+	width:1101px;
+	height:9px;
+	z-index: 2;
+}
+.backing1 {
+	background-image:url(/imagenes/backing1.jpg);
+	background-repeat:no-repeat;
+	width:122px;
+	height: 8px;
+	z-index: 1;
+}

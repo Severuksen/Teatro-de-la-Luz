@@ -3,23 +3,34 @@ session_start();
 if (!isset($_GET["op"])){
 	echo "<meta charset='utf-8'>";
 	echo "<script>alert('Usted no ha iniciado sesión'); window.location.assign('../index.php');</script>";
-} elseif ($_GET["op"] == "Registro"){
-	Registro();
-} elseif ($_GET["op"] == "Entrar"){
-	Entrar();
-} elseif ($_GET["op"] == "Abrir"){
-	Abrir();
-} elseif ($_GET["op"] == "Crear"){
-	Crear();
-} elseif ($_GET["op"] == "Modificar"){
-	Modificar();
-} elseif ($_GET["op"] == "Eliminar"){
-	Eliminar();
-} elseif ($_GET["op"] == "Salir"){
-	Salir();
 } else {
-	echo "<meta charset='utf-8'>";
-	echo "<script>alert('Usted no ha iniciado sesión'); window.location.assign('../index.php');</script>";
+	switch($_GET["op"]){
+		case "Registro":
+			Registro();
+			break;
+		case "Entrar":
+			Entrar();
+			break;
+		case "Abrir":
+			Abrir();
+			break;
+		case "Crear":
+			Crear();
+			break;
+		case "Modificar":
+			Modificar();
+			break;
+		case "Eliminar":
+			Eliminar();
+			break;
+		case "Salir":
+			Salir();
+			break;
+		default:
+			echo "<meta charset='utf-8'>";
+			echo "<script>alert('Usted no ha iniciado sesión'); window.location.assign('../index.php');</script>";
+			break;
+	}
 }
 
 /*////////////////////////////////////////////////////////////////////////////*/

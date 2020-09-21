@@ -17,8 +17,8 @@ if (isset($_REQUEST["mensaje"])) {
   $mail->SMTPAuth    = true;
   $mail->SMTPSecure  = "tls";
   $mail->Port        = 587;
-  $mail->Username    = "richardmalaga93@gmail.com"; 
-  $mail->Password    = "ksakpkdvotaklzin";
+  $mail->Username    = ""; 
+  $mail->Password    = "";
   $mail->FromName    = "Planos de Iluminación || Teatro de la Luz"; 
   $mail->Timeout     = 30;
   $mail->Subject     = "Comentario de: $nombre";

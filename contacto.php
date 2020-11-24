@@ -65,12 +65,8 @@ require("/modulos/consulta.php");
      	//echo $mail->ErrorInfo;
      	$exito = $mail->Send();
      	$intentos=$intentos+1;
-   }
-  if(!$exito){
-	  echo "1";
-  } else {
-	  echo "0";
-  } 
+  }
+  if(!$exito){echo "1";} else {echo "0";} 
  } else {
 	echo"<script>window.location.assign('main.php');</script>";
 }

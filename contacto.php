@@ -61,7 +61,7 @@ require("/modulos/consulta.php");
   $exito = $mail->Send();
   $intentos = 1; 
   while ((!$exito) && ($intentos < 5)) {
-	sleep(5);
+	    sleep(5);
      	//echo $mail->ErrorInfo;
      	$exito = $mail->Send();
      	$intentos=$intentos+1;

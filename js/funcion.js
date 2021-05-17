@@ -1,42 +1,57 @@
-﻿$(() => {
+﻿(function($){
+	$.fn.invisible = function(){
+		return this.each(function(){
+	    	$(this).attr("style", "visibility: hidden");
+		});
+	};
+	$.fn.visible = function(){
+		return this.each(function(){
+	    	$(this).attr("style", "visibility: visible");
+		});
+    };
+}(jQuery));
+
+$(() => {
 	"use strict";
 	$('.mover').rotatable().draggable();
 	$('.cuadros').draggable();
-});
+}); 
 
 //ELIMINAR DIVS
 function Eliminar(id) {
 	"use strict";
-	$.post({url: "modulos/modulos.php", data: {senal: "eliminar", id: id}});
+	$.post("modulos/modulos.php", {senal: "eliminar", id: id});
 	$(`#${id}`).remove();
 	document.oncontextmenu = () => {return false;};
 }
 
-function Guardar(id){
+const Guardar = (id) => {
 	"use strict";
-	var rotacion  = document.getElementById(id).style.transform;
-	var ang = rotacion[7];
-	var j = 8;
-	for (var i=0;i<rotacion.length-12;i++){
+	const rotacion = document.getElementById(id).style.transform;
+	let ang = rotacion[7];
+	let j = 8;
+	for (let i = 0; i < rotacion.length-12; i++){
 		ang = ang + rotacion[j];
 		j++;
 	}
 	var top  = document.getElementById(id).style.top;
 	var left = document.getElementById(id).style.left;
-	$.ajax({type: "POST", url: "modulos/modulos.php", data: {senal: "guardar", ang: ang, id: id, top: top, left: left}}); 
+	$.post("modulos/modulos.php", {senal: "guardar", ang: ang, id: id, top: top, left: left}); 
 }
 
 //<![CDATA[
 function Agregar(luces) {
 	"use strict";
-	$.ajax({type: "POST", url: "modulos/modulos.php", data: {senal: "insertar", aceptar: luces}, success: function(a) {
-		var id = "";
-		var estilo = "";
-		var sw = 0;
-		for (var i=0;i<a.length;i++){
-			if (a[i] == "+"){sw = 1; i++;}
-			if (sw == 0){id = id + a[i];}
-			if (sw == 1){estilo = estilo + a[i];}}
+	$.post("modulos/modulos.php", {senal: "insertar", aceptar: luces}, (respuesta) => {
+		let id     = "";
+		let estilo = "";
+		let sw     = 0;
+
+		for (let i = 0; i < respuesta.length; i++){
+			if (respuesta[i] == "+"){sw = 1; i++;}
+			if (sw == 0){id += respuesta[i];}
+			if (sw == 1){estilo += respuesta[i];}
+		}
 		var nuevo = document.createElement('div');
 		nuevo.setAttribute('id', id);
 		nuevo.setAttribute('oncontextmenu', 'Eliminar('+id+')');
@@ -50,33 +65,34 @@ function Agregar(luces) {
 		nuevo.setAttribute('type', 'application/javascript');
 		nuevo.setAttribute('src', 'js/funcion.js');
 		document.getElementsByTagName('head')[0].appendChild(nuevo);
-	}});
+	});
 }
 //]]>
 
 //MOSTRAR CUADRO LOGIN Y REGISTRO
-function Mostrar(mostrar, ocultar){
+const Mostrar = (mostrar, ocultar) =>{
 	"use strict";
 	if (mostrar == ""){
-		document.getElementById(ocultar).setAttribute("style","visibility: hidden;");} 
-	else if(ocultar == "") {
-		document.getElementById(mostrar).setAttribute("style","visibility: visible;");} 
-	else {
-		document.getElementById(mostrar).setAttribute("style","visibility: visible;");
-		document.getElementById(ocultar).setAttribute("style","visibility: hidden;");}
+		$(`#${ocultar}`).invisible();
+	} else if(ocultar == "") {
+		$(`#${mostrar}`).visible();
+	} else {
+		$(`#${mostrar}`).visible();
+		$(`#${ocultar}`).invisible();
+	}
 }
 
 function Recomendacion(rec){
 	"use strict";
 	Mostrar("","noenviado");
 	Mostrar("enviando","enviado");
-	$.ajax({type: "POST", url: "contacto.php", data: { mensaje: rec }, success: function(a) {
-		if(a == "1"){
+	$.post("contacto.php", {mensaje: rec }, (respuesta) => {
+		if(respuesta == "1"){
 			Mostrar("noenviado","enviando");
-		} else if(a == "0"){
+		} else if(respuesta == "0"){
 			Mostrar("enviado","enviando");
 		}		
-	}});
+	});
 }
 
 function Resetear(id) {
@@ -90,29 +106,29 @@ function Resetear(id) {
 function Pantalla(id){
 	"use strict";
 	var pantallaX = screen.width;
-	var objetoX = document.getElementById(id).style.width;
-	var cuerpoX = "";
-	for(var i=0; i<(objetoX.length-2); i++){cuerpoX = cuerpoX + objetoX[i];}	
+	var objetoX   = document.getElementById(id).style.width;
+	var cuerpoX   = "";
+	for(let i = 0; i < (objetoX.length-2); i++){cuerpoX = cuerpoX + objetoX[i];}	
 	var ancho = (pantallaX-cuerpoX)/2;
     /*#########################################################################*/
 	var pantallaY = screen.height;
-	var objetoY = document.getElementById(id).style.height;
-	var cuerpoY = "";
-	for(var j=0; j<(objetoY.length-2); j++){cuerpoY = cuerpoY + objetoY[j];}
+	var objetoY   = document.getElementById(id).style.height;
+	var cuerpoY   = "";
+	for(let j = 0; j < (objetoY.length-2); j++){cuerpoY = cuerpoY + objetoY[j];}
 	var alto = ((pantallaY/2)-(cuerpoY/4));
 	/*#########################################################################*/
-	document.getElementById(id).setAttribute("style","left: "+ancho+"px; top: "+alto+"px;");
+	$(`#${id}`).attr("style","left: "+ancho+"px; top: "+alto+"px;");
 }
 function Visualizar(id){
 	"use strict";
 	switch(id){
 		case "panelm":
-			document.getElementById(id).setAttribute("style","visibility: visible;");
-			document.getElementById(id).setAttribute("id","panelo");
-			document.getElementById("proyectonm").setAttribute("onclick","Visualizar('panelo');");
+			$(`#${id}`).visible();
+			$(`#${id}`).attr("id","panelo");
+			$('#proyectonm').attr("onclick","Visualizar('panelo');");
 			break;
 		case "panelo":
-			document.getElementById(id).setAttribute("style","visibility: hidden;");
+			$(`#${id}`).invisible();
 			document.getElementById(id).setAttribute("id","panelm");
 			document.getElementById("proyectonm").setAttribute("onclick","Visualizar('panelm');");
 			break;
@@ -121,13 +137,14 @@ function Visualizar(id){
 function ModificarProyecto(valor){
 	"use strict";
 	if (valor == ""){
-		document.getElementById("cambiado").setAttribute("style","visibility: hidden;");
-		document.getElementById("espacios").setAttribute("style","visibility: visible;");
+		$(`#cambiado`).invisible();
+		$(`#espacios`).visible();
 	} else {
 		$.ajax({type: "POST", url: "modulos/login.php?op=Modificar", data: {proyectoc: valor}, success: function(a) {
-			document.getElementById("espacios").setAttribute("style","visibility: hidden;");
-			document.getElementById("cambiado").setAttribute("style","visibility: visible;");
+			$(`#espacios`).invisible();
+			$(`#cambiado`).visible();
 			document.getElementById("proyectonm").remove();
+
 			var nuevo = document.createElement('div');
 			nuevo.setAttribute("onclick", "Visualizar('panelo');");
 			nuevo.setAttribute("id", "proyectonm");
@@ -141,7 +158,10 @@ function ModificarProyecto(valor){
 			nuevo.setAttribute('type', 'application/javascript');
 			nuevo.setAttribute('src', 'js/funcion.js');
 			document.getElementsByTagName('head')[0].appendChild(nuevo);
-			setTimeout(function(){Mostrar("","cambiado"); Mostrar("","espacios");}, 3000);
+			setTimeout(() => {
+				Mostrar("","cambiado");
+				Mostrar("","espacios");
+			}, 3000);
 		}});
 	}
 }

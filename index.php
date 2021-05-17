@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <title>ILUMINACIÓN TEATRAL 1.0</title>
         <link rel="stylesheet" href="css/hoja.css" type="text/css">
-        <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css"> 
+        <link rel="stylesheet" href="css/w3.css"> 
         <link rel="icon" type="image/png" href="imagenes/favicon.png" />
         <script type="application/javascript" src="js/jquery.min.js"></script>
         <script type="application/javascript" src="js/jquery.backstretch.min.js"></script>

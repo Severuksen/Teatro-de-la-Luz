@@ -22,7 +22,7 @@ if (!isset($_SESSION["disenador"]) || !isset($_SESSION["contrasena"])){
 		<link rel="icon" type="image/png" href="imagenes/favicon.png"/>
         <link rel="stylesheet" type="text/css" media="screen" href="css/hoja.css">
         <link rel="stylesheet" type="text/css" media="print" href="css/imprimir.css">
-        <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+        <link rel="stylesheet" href="css/w3.css">
 		<script type="application/javascript" src="js/jquery-1.11.3.js"></script>
         <script type="application/javascript" src="js/jquery-ui.js"></script>
 		<script type="application/javascript" src="js/jquery.ui.rotatable.min.js"></script>

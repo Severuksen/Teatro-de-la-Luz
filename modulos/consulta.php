@@ -1,7 +1,7 @@
 <?php
-$BD = new mysqli("localhost", "id2258232_root", "thennet", "id2258232_iluminacion");
+$BD = new mysqli("localhost", "root", "thennet", "iluminacion");
 function consulta($query,$mod){
-	$BD = new mysqli("localhost", "id2258232_root", "thennet", "id2258232_iluminacion");
+	$BD = new mysqli("localhost", "root", "thennet", "iluminacion");
 	$consulta = $BD->query($query);
 	if ($mod == "num-rows"){
 		$modo = $consulta->num_rows;}

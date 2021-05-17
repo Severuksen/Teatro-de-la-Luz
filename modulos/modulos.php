@@ -27,8 +27,8 @@ if (isset($_REQUEST["senal"])){
 		$luces    = $_REQUEST["aceptar"];
 		$proyecto = $_SESSION["proyectonro"];
 		$id       = $_SESSION["id"];
-		$idl      = consulta("SELECT nm_luz FROM luz WHERE id_luz = '$luces'","fetch-array");
-		if ($BD->query("INSERT INTO pos VALUES (NULL,'$id','$luces','$proyecto','-1px','-96px','0')") == TRUE){
+		$idl      = consulta("SELECT nm_luz FROM luz WHERE id_luz = $luces","fetch-array");
+		if ($BD->query("INSERT INTO pos VALUES (NULL, $id, $luces,'$proyecto','9px','6px','90px','90px', '0.000')") == TRUE){
 			if ($idn = $BD->query("SELECT id_p FROM pos WHERE id_usr = '$id' ORDER BY id_p DESC")){
 				$ida = $idn->fetch_array(MYSQLI_BOTH);
 				echo "$ida[0]+$idl[0]";

@@ -525,8 +525,8 @@
 	position: absolute;
 	background-image:url(../imagenes/luz1.png);
 	background-repeat:no-repeat;
-	width:44px;
-	height:96px;
+	width: 44px;
+	height: 96px;
 	z-index: 1;
 }
 .posicionbarra {

@@ -45,7 +45,7 @@ function Registro(){
 	$fecha      = date("Y-m-d H:i:s");
 	$contrasena = password_hash($contrasena, PASSWORD_DEFAULT);
 	/**********************************************************/
-	$consultauno = consulta("SELECT id_usr,nm_usr FROM usr WHERE nm_usr = '".strtolower($disenador)."'","fetch-array");
+	$consultauno = consulta("SELECT id_usr, nm_usr FROM usr WHERE nm_usr = '".strtolower($disenador)."'","fetch-array");
 	$consultados = consulta("SELECT cor_usr FROM usr WHERE cor_usr = '".strtolower($correo)."'","fetch-assoc");
 	/**********************************************************/
 	if ($consultauno["nm_usr"] == strtolower($disenador)){
@@ -113,7 +113,7 @@ function Crear(){
 	require("consulta.php");
 	$proyecto = $_REQUEST["proyectob"]; //NOMBRE DEL PROYECTO
 	$id = $_SESSION["id"]; //ID DEL USUARIO
-	$insertar = $BD->query("INSERT INTO pro VALUES (NULL,'$id','$proyecto')"); 
+	$insertar = $BD->query("INSERT INTO pro VALUES (NULL, '$id', '$proyecto')"); 
 	$consulta = consulta("SELECT id_pro FROM pro WHERE nm_pro='$proyecto'","fetch-array");
 	$_SESSION["proyectonm"]  = $proyecto; 
 	$_SESSION["proyectonro"] = $consulta[0];
@@ -125,7 +125,7 @@ function Crear(){
 function Modificar(){
 	require("consulta.php");
 	$proyecto = $_REQUEST["proyectoc"];
-	$sesion = $_SESSION["proyectonro"];
+	$sesion   = $_SESSION["proyectonro"];
 	$consulta = $BD->query("UPDATE pro SET nm_pro = '$proyecto' WHERE id_pro = '$sesion'");
 	if ($consulta){
 		$_SESSION["proyectonm"] = $proyecto;
@@ -137,8 +137,8 @@ function Modificar(){
 
 function Eliminar(){
 	require("consulta.php");
-	$proyecto = $_REQUEST["proyectoc"];
-	$sesion = $_SESSION["proyectonro"];
+	$proyecto  = $_REQUEST["proyectoc"];
+	$sesion    = $_SESSION["proyectonro"];
 	$consulta1 = $BD->query("DELETE FROM pro WHERE id_pro = '$proyecto'");
 	$consulta2 = $BD->query("DELETE FROM pos WHERE id_pro = '$proyecto'");
 	if ($consulta1 && $consulta2){

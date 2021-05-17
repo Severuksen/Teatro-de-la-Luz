@@ -1,4 +1,4 @@
-﻿$(document).ready(function() {
+﻿$(() => {
 	"use strict";
 	$('.mover').rotatable().draggable();
 	$('.cuadros').draggable();
@@ -7,9 +7,9 @@
 //ELIMINAR DIVS
 function Eliminar(id) {
 	"use strict";
-	$.ajax({type: "POST", url: "modulos/modulos.php",data: {senal: "eliminar", id: id}});
-	document.getElementById(id).remove();
-	document.oncontextmenu = function(){return false;};
+	$.post({url: "modulos/modulos.php", data: {senal: "eliminar", id: id}});
+	$(`#${id}`).remove();
+	document.oncontextmenu = () => {return false;};
 }
 
 function Guardar(id){
